@@ -54,7 +54,7 @@ def bmi_auswerten(_bmi_min, _bmi_max, _bmi):
         print("Sie haben Normalgewicht!")
 
 
-_alter, _groesse, _gewicht = werteeingabe()
-_bmi = bmi_berechnen(_groesse, _gewicht)
-_bmi_min, _bmi_max = bmi_grenze_ermitteln(_alter)
-bmi_auswerten(_bmi_min, _bmi_max, _bmi)
+alter, groesse, gewicht = werteeingabe()
+bmi = bmi_berechnen(groesse, gewicht)
+bmi_min, bmi_max = bmi_grenze_ermitteln(alter)
+bmi_auswerten(bmi_min, bmi_max, bmi)
