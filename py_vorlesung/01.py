@@ -44,3 +44,26 @@ werte.index(40)  # Index von Element mit Wert 40 bestimmen
 werte.count(13)  # Anzahl der Werte 13
 werte.reverse()  # Reihenfolge umkehren
 werte.copy()  # Kopie der Liste erzeugen
+
+# Funktionen
+
+
+def addiere(_x, _y=0):
+    return _x + _y
+# Wenn nur mit 1 Zahl aufgerufen, wird für y 0 angenommen.
+# (5) -> 5
+# (5,10) -> 15
+
+# main Methode
+
+
+def main():
+    _x = 3
+    _y = 5
+    _ergebnis = _x + _y
+    print(_ergebnis)
+
+
+if __name__ == "__main__":
+    main()
+# Hauptprogramm wird nur aufgerufen, wenn Datei direkt aufgerufen wird
