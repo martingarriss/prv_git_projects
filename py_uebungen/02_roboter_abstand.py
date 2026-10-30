@@ -47,6 +47,7 @@ def calculate_ema_filter(_liste, _alpha=0.2):
 
 
 def calculate_median_filter(_liste, _fenstergroesse=3):
+    
     _grenze = len(_liste) - _fenstergroesse
     i = 0
     _liste_median = []
