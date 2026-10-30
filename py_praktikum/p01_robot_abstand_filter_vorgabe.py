@@ -4,20 +4,30 @@
 # ---------------------------------------------------------
 import matplotlib.pyplot as plt
 
+
 # ---------------------------------------------------------
 # Funktionen
 # ---------------------------------------------------------
 def roboter_steuerung(sensor_liste):
     anzahl_stopp = 0
+    for wert in sensor_liste:
+        if wert > 30:
+            print("FREI")
+        elif wert < 15:
+            print("STOP")
+            anzahl_stopp += 1
+        else:
+            print("WARNUNG")
 
-    # HIER FOR SCHLEIFE EINFÜGEN #
-    
     print("Anzahl STOPP:", anzahl_stopp)
     return anzahl_stopp
 
+
 def mittelwert3(liste):
     gefilterte_liste = []
-    # HIER FOR SCHLEIFE EINFÜGEN #
+    for i in range(2, len(liste)):
+        gefilterte_liste.append((liste[i-2] + liste[i-1] + liste[i])/3)
+        print("test")
 
     print("Gleitender Mittelwert:")
     print(gefilterte_liste)
@@ -26,8 +36,10 @@ def mittelwert3(liste):
 
 def median3(liste):
     gefilterte_liste = []
-    # HIER FOR SCHLEIFE EINFÜGEN #
-    
+    for i in range(2, len(liste)):
+        ausschnitt = sorted(liste[i-2:i+1])
+        gefilterte_liste.append(ausschnitt[1])
+
     print("Median:")
     print(gefilterte_liste)
     return gefilterte_liste
@@ -39,9 +51,12 @@ def ema_filter(liste, alpha):
     # Erster Messwert = erster Filterwert
     ema_alt = liste[0]
     gefilterte_liste.append(ema_alt)
+    _gefiltert = liste[0]
 
-    # HIER FOR SCHLEIFE EINFÜGEN # 
-    
+    for abstand in liste:
+        _gefiltert = alpha * abstand + (1 - alpha) * _gefiltert
+        gefilterte_liste.append(_gefiltert)
+
     print("EMA:")
     print(gefilterte_liste)
 
