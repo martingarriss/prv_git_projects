@@ -102,6 +102,6 @@ def draw_block(street_length=400, x_start=-200, y_start=-200):
     draw_street('vertikal', street_length, x_start - 30, y_start)
 
 
-draw_block()
-# draw_street()
-turtle.done()
+if __name__ == '__main__':
+    draw_block()
+    turtle.done()
