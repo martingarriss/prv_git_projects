@@ -67,7 +67,7 @@ def draw_street(t_direction='horizontal', size=400,
     else:
         z_direction = 90
     t.setheading(z_direction)
-    t.pensize(5)
+    t.pensize(3)
     t.forward(size)
     t.teleport(x_origin, y_origin)
     t.penup()
@@ -102,6 +102,6 @@ def draw_block(street_length=400, x_start=-200, y_start=-200):
     draw_street('vertikal', street_length, x_start - 30, y_start)
 
 
-# draw_block()
-draw_street()
+draw_block()
+# draw_street()
 turtle.done()
