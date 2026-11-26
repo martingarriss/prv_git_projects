@@ -4,7 +4,7 @@ from pathlib import Path
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel
 from PyQt6.QtWidgets import QGridLayout, QVBoxLayout, QHBoxLayout, QMessageBox
 
-N = 4  # Erweiterung: N = 5
+N = 5  # Erweiterung: N = 5
 BLAU = False
 ROT = True
 
@@ -33,7 +33,12 @@ class Quinto(QWidget):
         self.spielFeld = []
         self.spielzugLbl = QLabel("Quinto: Alle Felder rot färben!")
         self.zaehlerLbl = QLabel("Anzahl Klicks: 0")
+        self.neustartLbl = QPushButton("Neustart")
+        self.beendenLbl = QPushButton("Beenden")
         # Hier weitere Buttons ergänzen
+
+        self.neustartLbl.clicked.connect(self.restartClicked)
+        self.beendenLbl.clicked.connect(self.close)
 
         # Hier die Buttons mit den Callback-Methoden verbinden
         # z.B. restartClicked()
@@ -59,6 +64,8 @@ class Quinto(QWidget):
         seite.addWidget(self.spielzugLbl)
         seite.addWidget(self.zaehlerLbl)
         seite.addStretch()
+        seite.addWidget(self.neustartLbl)
+        seite.addWidget(self.beendenLbl)
         # Ergänze Widgets hier
         hauptlayout.addLayout(seite, 2)
         self.resize(680, 440)
@@ -91,6 +98,7 @@ class Quinto(QWidget):
         self.zaehlerLbl.setText(f"Anzahl Klicks : {self.numbOfKlicks}")
         if self.checkGameOver():
             self.spielzugLbl.setText("Gewonnen!!!")
+            self.spieleGewinnsound()
             QMessageBox.information(self, "Quinto",
                                     f"Gewonnen in {self.numbOfKlicks} Klicks!")
         # TODO d): optional yeah.wav abspielen (PyQt6.QtMultimedia).
@@ -101,13 +109,23 @@ class Quinto(QWidget):
                 if not (btn.owner == ROT):
                     return False
         return True
-        # TODO b): True zurückgeben, wenn alle Felder ROT sind.
-        # return False
 
     def restartClicked(self):
+        # for reihe in self.spielFeld:
+        #     for spalte in self.spielFeld:
+        #         if btn.owner == ROT
+        for zeile in self.spielFeld:
+            for btn in zeile:
+                if btn.owner == ROT:
+                    btn.owner = not btn.owner
+                    farbe = "red" if btn.owner == ROT else "blue"
+                    btn.setStyleSheet(f"background-color: {farbe}; "
+                                      "border: 1px solid black; "
+                                      "border-radius: 0px;")
+        self.numbOfKlicks = 0
+        self.zaehlerLbl.setText(f"Anzahl Klicks : {self.numbOfKlicks}")
         # TODO e): Alle Felder blau setzen und wieder aktivieren,
         # Klickzähler auf 0 setzen und Labels zurücksetzen.
-        pass
 
     def spieleGewinnsound(self):
         """Spielt yeah.wav ab, falls Datei und Multimedia verfügbar sind."""
